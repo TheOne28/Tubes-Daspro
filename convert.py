@@ -25,12 +25,12 @@ def array_to_reality(third_data, name):
         for j in range(len(third_data)):
             if(j != 0):
                 if(name == "gadget.csv"):
-                    third_data[3] = int(third_data[3])
-                    third_data[5] = int(third_data[5])
+                    third_data[j][3] = int(third_data[j][3])
+                    third_data[j][5] = int(third_data[j][5])
                 elif(name == "consumables.csv"):
-                    third_data[3] = int(third_data[3])
+                    third_data[j][3] = int(third_data[j][3])
                 elif(name == "gadget_borrom_history.csv" or name == "gadget_return_history.csv"):
-                    third_data[4] = int(third_data[4])
+                    third_data[j][4] = int(third_data[j][4])
         return third_data
 
 #Ini fungsi yang gunanya ngubah data jadi array, udah kepisah tapi belum diubah jadi integer atau float
