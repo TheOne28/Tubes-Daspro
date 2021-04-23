@@ -1,4 +1,3 @@
-
 #fungsi untuk mengubah data menjadi string yang siap untuk disimpan
 def array_to_string(need_save):
     new_string = ""
@@ -18,7 +17,8 @@ def array_to_reality(third_data, name):
     #Untuk file user, semuanya string
     #Untuk file gadget, jumlah(3) dan tahun(5) integer
     #Untuk file consumable, jumlah(3) integer
-    #Untuk file gadget_borrow dan gadget_return, jumlah(4) integer
+    #Untuk file gadget_borrow jumlah(4) integer
+    #Untuk file consumbale history, jumlah(4)
     if(name == "user.csv"):
         return third_data
     else:
@@ -29,7 +29,9 @@ def array_to_reality(third_data, name):
                     third_data[j][5] = int(third_data[j][5])
                 elif(name == "consumables.csv"):
                     third_data[j][3] = int(third_data[j][3])
-                elif(name == "gadget_borrom_history.csv" or name == "gadget_return_history.csv"):
+                elif(name == "gadget_borrom_history.csv"):
+                    third_data[j][4] = int(third_data[j][4])
+                elif(name == "consumables_history.csv"):
                     third_data[j][4] = int(third_data[j][4])
         return third_data
 
