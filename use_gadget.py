@@ -1,7 +1,27 @@
 import convert
 import time
 
-def find_gadge_years():
+def find_gadget_rarity():
+    file = convert.open_file("gadget.csv")
+    #Diasumsi masukan selalu benar
+    rarity = input("Masukkan rarity: ")
+    
+    found = False
+    for i in range(len(file)):
+        if(i != 0):
+            if(file[i][4] == rarity):
+                time.sleep(0.5)
+                found = True
+                print("Nama : " + file[i][1])
+                print("Deskripsi : " + file[i][2])
+                print("Jumlah : " + str(file[i][3]) + " buah")
+                print("Rarity : " + file[i][4])
+                print("Tahun ditemukan : " + str(file[i][5]))
+
+    if(not found):
+        print("Tidak terdapat gadget dengan rarity " + rarity)
+
+def find_gadget_years():
     file = convert.open_file("gadget.csv")
     #Pakai asumsi di soal, yaitu input selalu benar
     tahun = int(input("Masukkan tahun : "))
