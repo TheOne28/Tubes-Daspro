@@ -64,12 +64,22 @@ def open_file(name):
     file = open(name, "r")
     first_data = file.readlines()
     file.close()
-
+    
+    if(first_data[len(first_data) - 1] == []):
+        first_data.pop(len(first_data) - 1)
+        
     almost_finish_data = data_to_array(first_data)
     finish_data = array_to_reality(almost_finish_data, name)
     return finish_data
 
 def save_file(name, new_file):
     file = open(name, "w")
-    file.write(new_file)
+    ready = array_to_string(new_file)
+    file.write(ready)
+    file.close()
+
+def create_new(name, new_file):
+    file = open(name, "a")
+    ready = array_to_string(new_file)
+    file.write(ready)
     file.close()
