@@ -19,39 +19,52 @@ import validation
 def start():
     global all_data 
     #Bisa buka link https://note.nkmk.me/en/python-script-file-path/ buat os fungsinya
-    folder = os.path.basename(os.path.dirname(__file__))
-
+    filepath = os.path.dirname(__file__)
+    file_name = ["user.csv", "gadget.csv", "consumables.csv", "consumable_history.csv", "gadget_borrow_history.csv", "gadget_return_history.csv"]
     parser = argparse.ArgumentParser()
-
-    #Versi positional argument
-
-    #Ada 2 kemungkinan kalau nama folder salah
-    # 1. Program gak ke run
-    # 2. buat folder dengan argumen yang dimasukkan
-    #Di sini aku pake kemungkinan pertama
 
     parser.add_argument("name", nargs = "?", action = "store")
     args = parser.parse_args()
-    if(args.name == folder):
-        #Pesan nya nih masih bingung kira-kira bagusnya apa
-        print("Welcome to party sire")
-        all_data = f1416.load()
+    
+    #Aku ganti asumsi buat nyesuaian yang di demo
+    #Jadi nama folder yang dimasukkan itu nama folder yang menyimpan file csv nya, dengan syarat filenya itu anak dari folder besarnya
+    #folder besarnya nih folder yang ada file pythonnya
 
-        main_program()
-    elif(args.name == None):
-        print("Please input folder name first")
+    if(args.name == None):
+        #Perbaikan pesan biar lebih rapi
+        parser.error("Please input folder name first")
     else:
-        print("Wrong folder, nothing loaded")
+        if not os.path.exists("{}\\{}".format(filepath, args.name)):
+            print("Wrong folder, nothing_loaded")
+        else:
+            complete = True
+            for i in range(6):
+                if not os.path.exists("{}\\{}\\{}".format(filepath, args.name, file_name[i])):
+                    complete = False
+            
+            if(complete):
+                print("Welcome to party sire")
+                
+                all_data = f1416.load(args.name)
+                main_program()
 
 def main_program():
     global all_data
-    user, id_user = f0102.user_login(all_data[0])
-    #Selama belum bisa log in, bakal keluar fungsi login terus
-    while(user == "incorrect"):
-        time.sleep(0.5)
-        
-        print("Login ulang")
+    choice = ["login", "help"]
+    comm = validation.input_validation("string", "Command: ", choice)
+    
+    while(comm == "help"):
+        f1416.help("all")
+        comm = validation.input_validation("string", "Command: ", choice)
+    else:
         user, id_user = f0102.user_login(all_data[0])
+        #Selama belum bisa log in, bakal keluar fungsi login terus
+        while(user == "incorrect"):
+            time.sleep(0.5)
+            
+            print("Login ulang")
+            user, id_user = f0102.user_login(all_data[0])
+   
     while True:     
         if(user == "admin"):
             #Available command
@@ -62,6 +75,11 @@ def main_program():
             #lower gunanya buat ngubah jadi huruf kecil semua
             if (command.lower() == "login"):
                 user, id_user = f0102.user_login(all_data[0])
+                while(user == "incorrect"):
+                    time.sleep(0.5)
+                    print("Login ulang")
+                    user, id_user = f0102.user_login(all_data[0])
+
             elif(command.lower() == "register"):
                 all_data[0] = f0102.user_register(all_data[0])
             elif(command.lower() == "carirarity"):
@@ -86,7 +104,7 @@ def main_program():
                 f1416.exit(all_data)
                 break
             else:
-                f1416.help()
+                f1416.help(user)
         
         else: 
             #Available Command
@@ -96,6 +114,12 @@ def main_program():
 
             if (command.lower() == "login"):
                 user, id_user = f0102.user_login(all_data[0])
+                while(user == "incorrect"):
+                    time.sleep(0.5)
+
+                    print("Login ulang")
+                    user, id_user = f0102.user_login(all_data[0])
+
             elif(command.lower() == "carirarity"):
                 f0304.find_gadget_rarity(all_data[1])
             elif(command.lower() == "caritahun"):
@@ -112,8 +136,13 @@ def main_program():
                 f1416.exit(all_data)
                 break
             else:
-                f1416.help()
+                f1416.help(user)
 
 if __name__ == "__main__":
     start()
 
+#function len(x: array of integer) -> integer
+#{fungsi untuk menghitung panjang arrray}
+
+#procesudr argparse()
+#{Prosedur untuk membaca argumen dari terminal}

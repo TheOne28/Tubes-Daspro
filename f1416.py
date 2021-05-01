@@ -5,28 +5,24 @@ import validation
 #Need to discuss
 #1. Dicek lagi urutan filenya, biar gak bingung atau dijelasin di help
 #2. Cek lagi asumsi nama filenya
+path = os.path.dirname(__file__)
+file_name = ["user.csv", "gadget.csv", "consumables.csv", "consumable_history.csv", "gadget_borrow_history.csv", "gadget_return_history.csv"]
 
-def load():
+def load(folder):
+    
     #Fungsi load disini kupake cuma buat ngeload semua data nya
     #Idenya, semua data dijadiin di satu array di all_data
     all_data = []
 
     #Asumsi nama file tetap
-    all_data.append(convert.open_file("user.csv")) #All_data[0]
-    all_data.append(convert.open_file("gadget.csv"))#All_data[1]
-    all_data.append(convert.open_file("consumables.csv"))#All_data[2]
-    all_data.append(convert.open_file("consumable_history.csv"))#All_data[3]
-    all_data.append(convert.open_file("gadget_borrow_history.csv"))#All_data[4]
-    all_data.append(convert.open_file("gadget_return_history.csv"))#All_data[5]
+    for i in range(6):
+        all_data.append(convert.open_file("{}\\{}\\{}".format(path, folder, file_name[i]))) #All_data[0]
 
     return all_data
 
 def save(all_data):
     folder_name = validation.input_validation("string", "Masukkan nama folder penyimpanan: ", [])
-    path = os.path.dirname(__file__)
-
-    file_name = ["user.csv", "gadget.csv", "consumables.csv", "consumable_history.csv", "gadget_borrow_history.csv", "gadget_return_history.csv"]
-    
+ 
     while True:
         if not os.path.exists("{}\\{}".format(path, folder_name)):
             try:
@@ -46,18 +42,41 @@ def save(all_data):
             convert.create_new("{}\\{}\\{}".format(path, folder_name, file_name[i]), all_data[i])
 
 #Pake punya gilang
-def help():
-    print("======================= Help =================================")
-    print("Register - untuk melakukan register user baru")
-    print("login - untuk melakukan login ke dalam sistem")
-    print("tambah item -untuk melakukan penambahan item")
-    print("Pencarian gadget berdasarkan rarity - untuk melakukan pencarian gadget dengan berdasarkan rarity")
-    print("Pencarian gadget berdasarkan tahun - untuk melakukan pencarian gadget dengan berdasarkan tahun")
-    print("Hapus gadget atau consumabke - untuk melakukan penghapusan gadget atau consumable dari sistem")
-    print("Mengubah jumlah gadget atau consumable pada inventory - untuk mengubah jumlah dari gadget atau consumable yang diinginkan pada inventory")
-    print("Meminjam gadget - untuk melakukan peminjaman pada gadget yang diinginkan")
-    print("Mengembalikan gadget - untuk melakukan pengembalian gadget yang telah dipinjam sebelumnya")
-    print("Meminta consumable - untuk melakukan permintaan consumable")
+def help(user):
+    #Aku kepikiran kalau misalnya help itu nampilin command yang tersedi, jadi kalau misalnya sebelum
+    #yang ditampilin cuma login dan help doanh, gimana ?
+    if(user == "user"):
+        #Load gak dimasukin soalnya bukan command yang tersedia
+        print("======================= Help =================================")
+        print("login - untuk melakukan login ke dalam sistem")
+        print("pinjam - untuk melakukan peminjaman pada gadget yang diinginkan")
+        print("kembalikan - untuk melakukan pengembalian gadget yang telah dipinjam sebelumnya")
+        print("minta - untuk melakukan permintaan consumable")
+        print("save - untuk melakukan peenyimpanan data")
+        print("exit - untuk keluar dari program")
+        print("help - untuk mengeluarkan bantuan dan perintah yang tersedia")
+
+    elif(user == "admin"):
+        #Load gak dimasukin soalnya bukan command yang tersedia
+        print("======================= Help =================================")
+        print("Register - untuk melakukan register user baru")
+        print("login - untuk melakukan login ke dalam sistem")
+        print("tambahitem -untuk melakukan penambahan item")
+        print("hapusitem - untuk melakukan penghapusan gadget atau consumable dari sistem")
+        print("ubahumlah - untuk mengubah jumlah dari gadget atau consumable yang diinginkan pada inventory")
+        print("carirarity- untuk melakukan pencarian gadget dengan berdasarkan rarity")
+        print("caritahun- untuk melakukan pencarian gadget dengan berdasarkan tahun")
+        print("riwayatpinjam - untuk menampilkan riwayat peminjaman gadget")
+        print("riwayatkembali - untuk menampilkan riwayat pengembalian gadget")
+        print("riwayatambil - untuk menampilkan riwayat pengambilan consumables")
+        print("save - untuk melakukan peenyimpanan data")
+        print("exit - untuk keluar dari program")
+        print("help - untuk mengeluarkan bantuan dan perintah yang tersedia")
+
+    else:
+        print("======================= Help =================================")
+        print("login - untuk melakukan login ke dalam sistem")
+        print("help - untuk mengeluarkan bantuan dan perintah yang tersedia")
 
 def exit(all_data):
     cek = validation.input_validation("string", "Apakah anda mau melakukan penyimpanan file yang diubah? (Y/N)", ["y", "n"])
