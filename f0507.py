@@ -15,9 +15,9 @@ def add_item(all_data):
 
     if(id[0] == "G"):
         file = all_data[1]
-        found = False
         
         while True:
+            found = False
             for data in file:
                 if(data[0] == id):
                     found = True
@@ -31,9 +31,9 @@ def add_item(all_data):
             
         #Tidak ada batasan untuk nama dan deskripsi selain uji dasar
         name = validation.input_validation("string", "Masukkan nama: ", [])
-        desc = validation.input_validation("string", "Masukkan deskirpsi", [])
+        desc = validation.input_validation("string", "Masukkan deskirpsi: ", [])
         jumlah = validation.jumlah_validation()
-        rarity = validation.input_validation("string", "Masukkan rarity: ", ["C", "B", "A", "S"])
+        rarity = validation.input_validation("string", "Masukkan rarity: ", ["c", "b", "a", "s"])
         year = validation.input_validation("integer", "Masukkan tahun: ", [])
         
         new_gadget = []
@@ -66,9 +66,9 @@ def add_item(all_data):
         
         #Tidak ada batasan untuk nama dan deskripsi selain uji dasar
         name = validation.input_validation("string", "Masukkan nama: ", [])
-        desc = validation.input_validation("string", "Masukkan deskirpsi", [])
+        desc = validation.input_validation("string", "Masukkan deskirpsi: ", [])
         jumlah = validation.jumlah_validation()
-        rarity = validation.input_validation("string", "Masukkan rarity: ", ["C", "B", "A", "S"])            
+        rarity = validation.input_validation("string", "Masukkan rarity: ", ["c", "b", "a", "s"])            
             
         new_gadget  = []            
                        
@@ -142,15 +142,15 @@ def ubah_jumlah(all_data):
         for data in file:
             if(data[0] == id):
                 if(data[3] + jumlah < 0):
-                    print("{} ".format(abs(jumlah)) + data[1] + " gagal dibuang karena stok kurang. Stok sekarnag : {} (< {})".format(data[3], abs(jumlah)))
+                    print("{} ".format(abs(jumlah)) + data[1] + " gagal dibuang karena stok kurang. Stok sekarang : {} (< {})".format(data[3], abs(jumlah)))
                 
                 else:
                     data[3] = data[3] + jumlah
                     #Perintah format buat modif string, ngisi yang dikurung pake argumen dalem formatnya
                     if(jumlah < 0):
-                        print("{} ".format(abs(jumlah)) + data[1] + " berhasil dibuang. Stok sekarnag : {}".format(data[3]))
+                        print("{} ".format(abs(jumlah)) + data[1] + " berhasil dibuang. Stok sekarang : {}".format(data[3]))
                     else:
-                        print("{} ".format(jumlah) + data[1] + " berhasil ditambahkan. Stok sekarnag : {} ".format(data[3]))
+                        print("{} ".format(jumlah) + data[1] + " berhasil ditambahkan. Stok sekarang : {} ".format(data[3]))
                 
                 found = True  
         

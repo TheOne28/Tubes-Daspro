@@ -52,10 +52,10 @@ def date_validation(date):
             if(date[i] != "/"):
                 in_valid = False
                 break
-            else:
-                if(ord(date[i]) < 48 or ord(date[i] )> 57):
-                    in_valid = False
-                    break
+        else:
+            if(ord(date[i]) < 48 or ord(date[i] )> 57):
+                in_valid = False
+                break
                 
     if(in_valid):
         month = int(date[3:5])
@@ -85,7 +85,8 @@ def jumlah_validation():
     while True:
         jumlah = input_validation("integer", "Masukkan jumlah: ", [])
 
-        if(jumlah >= 0):
+        #Asumsi jumlah boleh 0
+        if(jumlah > 0):
             return jumlah
         else:
-            print("Jumlah harus > 0")
+            print("Jumlah harus >= 0")

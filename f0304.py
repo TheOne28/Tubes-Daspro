@@ -1,6 +1,18 @@
 import time
 #Bagian ini semua input dijamin valid, jadi gak sah input validation, CMIIW
 
+def comparison(operator, first, second):
+    if(operator == ">"):
+        return first > second
+    elif(operator == ">="):
+        return first >= second
+    elif(operator == "<"):
+        return first < second
+    elif(operator == "<="):
+        return first <= second
+    else:
+        return first == second
+
 def find_gadget_rarity(gadget_file):
     #Asumsi masukan selalu benar
     rarity = input("Masukkan rarity: ")
@@ -30,15 +42,15 @@ def find_gadget_years(gadget_file):
     sign = input("Masukkan kategori: ")
 
     # Bagian ini untuk ngubah inputnya, biar jadi operator, buat fungsi 3 nggak perlu kok, langsung loopnya sama found aja
-    op = {'>': (lambda x,y : x > y), '>=' : (lambda x, y: x >= y), '<' : (lambda x, y: x < y), '<=' : (lambda x,y : x <= y), '=' : (lambda x, y: x == y)}
+    #op = {'>': (lambda x,y : x > y), '>=' : (lambda x, y: x >= y), '<' : (lambda x, y: x < y), '<=' : (lambda x,y : x <= y), '=' : (lambda x, y: x == y)}
     
     found = False
     print("Hasil pencarian: ")
-
+    
     for i in range(len(gadget_file)):
         #Untuk i == 0, itu headernya dan gak perlu dicek
         if(i != 0):
-            if(op[sign](gadget_file[i][5], tahun)):
+            if(comparison(sign, gadget_file[i][5], tahun)):
                 time.sleep(0.5)
 
                 print("Nama : " + gadget_file[i][1])

@@ -12,12 +12,12 @@ def load():
     all_data = []
 
     #Asumsi nama file tetap
-    all_data.append(convert.open_file("user.csv"))
-    all_data.append(convert.open_file("gadget.csv"))
-    all_data.append(convert.open_file("consumables.csv"))
-    all_data.append(convert.open_file("consumable_history.csv"))
-    all_data.append(convert.open_file("gadget_borrow_history.csv"))
-    all_data.append(convert.open_file("gadget_return_history.csv"))
+    all_data.append(convert.open_file("user.csv")) #All_data[0]
+    all_data.append(convert.open_file("gadget.csv"))#All_data[1]
+    all_data.append(convert.open_file("consumables.csv"))#All_data[2]
+    all_data.append(convert.open_file("consumable_history.csv"))#All_data[3]
+    all_data.append(convert.open_file("gadget_borrow_history.csv"))#All_data[4]
+    all_data.append(convert.open_file("gadget_return_history.csv"))#All_data[5]
 
     return all_data
 
@@ -26,8 +26,18 @@ def save(all_data):
     path = os.path.dirname(__file__)
 
     file_name = ["user.csv", "gadget.csv", "consumables.csv", "consumable_history.csv", "gadget_borrow_history.csv", "gadget_return_history.csv"]
-    if not os.path.exists("{}\\{}".format(path, folder_name)):
-        os.makedirs("{}\\{}".format(path, folder_name))
+    
+    while True:
+        if not os.path.exists("{}\\{}".format(path, folder_name)):
+            try:
+                os.makedirs("{}\\{}".format(path, folder_name))
+            except OSError:
+                print("Nama folder tidak valid")
+                folder_name = validation.input_validation("string", "Masukkan nama folder penyimpanan: ", [])
+            else:
+                break
+        else:
+            break
 
     for i in range(6):
         if os.path.exists("{}\\{}\\{}".format(path, folder_name, file_name[i])):

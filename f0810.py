@@ -80,18 +80,18 @@ def return_gadget(id_user, all_data):
                     print("{}. {}".format(i,data[1]))
                     break
     
-    pinjam = validation.input_validation("integer", "Masukkan nomor peminjaman", [])
+    pinjam = validation.input_validation("integer", "Masukkan nomor peminjaman: ", [])
     
     while(pinjam not in range(1, len(borrowed_gadget) + 1)):
         print("Nomor pinjaman tidak valid")
-        pinjam = validation.input_validation("integer", "Masukkan nomor peminjaman", [])
+        pinjam = validation.input_validation("integer", "Masukkan nomor peminjaman: ", [])
     
-    date = validation.input_validation("string", "Masukkan tanggal peminjaman: ", [])
+    date = validation.input_validation("string", "Masukkan tanggal pengembalian: ", [])
     date_valid = validation.date_validation(date)
     
     while(not date_valid):
         print("Masukan tanggal tidak valid")
-        date = validation.input_validation("string", "Masukkan tanggal peminjaman: ", [])
+        date = validation.input_validation("string", "Masukkan tanggal pengembalian: ", [])
         date_valid = validation.date_validation(date)
 
     #Pengisian gadget_return
@@ -110,6 +110,7 @@ def return_gadget(id_user, all_data):
     for data in file1:
         if(data[0] == new_return[1]):
             data[5] = "Yes"
+            data[3] += borrowed_count[pinjam - 1]
 
     print("Iten {}(x{}) berhsil dikembalikan".format(borrowed_gadget[pinjam - 1], borrowed_count[pinjam - 1]))
 

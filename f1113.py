@@ -72,9 +72,9 @@ def selection_sort(file1, file2, file3):
     return sorted
 
 def look_gadget_borrow(all_data):
-    file1 = all_data[4]
-    file2 = all_data[0]
-    file3 = all_data[1]
+    file1 = all_data[4] #Gadget_borrow
+    file2 = all_data[0]#User
+    file3 = all_data[1]#Gadget
     
     sorted = selection_sort(file1, file2, file3)
 
