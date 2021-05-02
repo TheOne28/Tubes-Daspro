@@ -165,7 +165,7 @@ def main_program():
                 print("\n>>kembalikan")
                 time.sleep(0.5)
                 
-                all_data[4], all_data[5] = f0810.return_gadget(id_user, all_data)
+                all_data[4], all_data[5] = f0810.return_gadget(id_user, all_data, item_database)
             elif(command.lower() == 'minta'):
                 print("\n>>minta")
                 time.sleep(0.5)
