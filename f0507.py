@@ -40,8 +40,14 @@ def add_item(all_data):
             desc = validation.input_validation("string", "Masukkan deskirpsi: ", [])
             jumlah = validation.jumlah_validation()
             rarity = validation.input_validation("string", "Masukkan rarity: ", ["c", "b", "a", "s"])
-            year = validation.input_validation("integer", "Masukkan tahun: ", [])
             
+            while True:
+                year = validation.input_validation("integer", "Masukkan tahun: ", [])
+                if(year <= 0):
+                    print("Tahun harus >= 0")
+                else:
+                    break
+
             new_gadget = []
             new_gadget.append(id)
             new_gadget.append(name)
