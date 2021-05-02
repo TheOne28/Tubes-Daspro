@@ -72,10 +72,10 @@ def selection_sort(file1, file2, file3, file4):
     
     return sorted
 
-def look_gadget_borrow(all_data):
+def look_gadget_borrow(all_data, database):
     file1 = all_data[4] #Gadget_borrow
     file2 = all_data[0]#User
-    file3 = all_data[1]#Gadget
+    file3 = database #Gadget
     
     sorted = selection_sort(file1, file2, file3, []) #Disini file4 gak kepake
 
@@ -113,10 +113,10 @@ def look_gadget_borrow(all_data):
                 print("Tanggal peminjaman: {}".format(sorted[j][3]))
                 print("Jumlah: {}".format(sorted[j][4]))
         
-def look_gadget_return(all_data):
+def look_gadget_return(all_data, database):
     file1 = all_data[5]#Gadget_Return
     file2 = all_data[0]#User
-    file3 = all_data[1]#Gadget
+    file3 = database#Gadget
     file4 = all_data[4]#Gadget_borrow
     
     sorted = selection_sort(file1, file2, file3, file4)
@@ -152,10 +152,10 @@ def look_gadget_return(all_data):
                 print("Nama gadget: {}".format(sorted[j][2]))
                 print("Tanggal pengembalian: {}".format(sorted[j][3]))
             
-def look_history_consumables(all_data):
+def look_history_consumables(all_data, database):
     file1 = all_data[3]#Consumables_histtory
     file2 = all_data[0]#User
-    file3 = all_data[2]#Consumable
+    file3 = database#Consumable
     
     sorted = selection_sort(file1, file2, file3, [])
 
