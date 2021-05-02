@@ -60,7 +60,6 @@ def main_program():
             user, id_user = f0102.user_login(all_data[0])
    
     while True:     
-        item_database = []
 
         if(user == "admin"):
             choices = ["register", "login", "carirarity", "caritahun", "tambahitem", 
