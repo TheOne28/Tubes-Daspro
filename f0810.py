@@ -125,6 +125,7 @@ def return_gadget(id_user, all_data):
     print("Barang yang dipinjam: ")
     
     time.sleep(0.5)
+    indx = 1
     for i in range(len(file1)):
         if(i != 0) and (id_user == file1[i][1]):
             borrowed_id.append(file1[i][0])
@@ -133,7 +134,8 @@ def return_gadget(id_user, all_data):
             for data in file2:
                 if(data[0] == file1[i][2]):
                     borrowed_gadget.append(data[1])
-                    print("{}. {}".format(i,data[1]))
+                    print("{}. {}".format(indx,data[1]))
+                    indx += 1
                     break
     
     pinjam = validation.input_validation("integer", "Masukkan nomor peminjaman: ", [])
@@ -172,7 +174,7 @@ def return_gadget(id_user, all_data):
             data[3] += borrowed_count[pinjam-1]
 
     time.sleep(0.5)
-    print("\nIten {}(x{}) berhsil dikembalikan".format(borrowed_gadget[pinjam - 1], borrowed_count[pinjam - 1]))
+    print("\nItem {}(x{}) berhasil dikembalikan".format(borrowed_gadget[pinjam - 1], borrowed_count[pinjam - 1]))
 
     return file1, file3    
 
