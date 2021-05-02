@@ -115,7 +115,7 @@ def main_program():
                 
                 f1113.look_history_consumables(all_data)
             elif(command.lower() == "save"):
-                print("\Saving...")
+                print("Saving...")
                 time.sleep(0.5)
                 
                 f1416.save(all_data)
