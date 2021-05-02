@@ -112,10 +112,10 @@ def gadget_borrow(id_peminjam, all_data):
 
     return file1
 
-def return_gadget(id_user, all_data):
+def return_gadget(id_user, all_data, database):
 
     file1 = all_data[4] #Gadget_borrow
-    file2 = all_data[1] #Gadget
+    file2 = database #Gadget
     file3 = all_data[5] #Gadget_retturn
 
     borrowed_gadget = [] #Nyimpen gadget
