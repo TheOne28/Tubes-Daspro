@@ -1,2 +1,11 @@
 id;nama;deskripsi;jumlah;rarity;tahun_ditemukan
-1;Samsung;Ujicoba;1;S;2010
+G1;Samsung;HP Samsung;1;S;2010
+G2;Nokia;HP Nokia;20;C;1990
+G3;Apple;Iphone;10;S;2003
+G4;Lenovo;Laptop Lenovo;8;A;2004
+G5;Acer; Acer Gaming;5;S;2008
+G6;HP; Laptop HP;15;B;2010
+G7;Asus;Asus ROG;1;S;2020
+G8;Xiaomi;HP Xiaomi;22;A;2015
+G9;Oppo; HP Oppo;6;B;2007
+G10;Vivo;HP Vivo;18;A;2010
