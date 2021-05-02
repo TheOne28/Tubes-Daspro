@@ -63,6 +63,7 @@ def user_register(user_file):
         if(check):
             username = validation.input_validation("string", "Masukkan username: ", [])
         else:
+            print("Username available")
             break
 
     #Asumsi tidak ada batasann untuk alamat dan password    
