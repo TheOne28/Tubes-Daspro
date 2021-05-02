@@ -155,7 +155,7 @@ def look_gadget_return(all_data):
 def look_history_consumables(all_data):
     file1 = all_data[3]#Consumables_histtory
     file2 = all_data[0]#User
-    file3 = all_data[1]#Gadget
+    file3 = all_data[2]#Consumable
     
     sorted = selection_sort(file1, file2, file3, [])
 
