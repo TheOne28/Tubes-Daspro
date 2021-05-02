@@ -144,7 +144,7 @@ def remove_item(all_data):
                         
                         borrowed = False
                         for bor in borrow:
-                            if(id == bor[2]):
+                            if(id == bor[2] and bor[5] == "No"):
                                 borrowed = True
                                 break
 
