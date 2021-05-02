@@ -89,4 +89,4 @@ def jumlah_validation():
         if(jumlah > 0):
             return jumlah
         else:
-            print("Jumlah harus >= 0")
+            print("Jumlah harus > 0")
