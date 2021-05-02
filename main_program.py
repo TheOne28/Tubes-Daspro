@@ -60,6 +60,8 @@ def main_program():
             user, id_user = f0102.user_login(all_data[0])
    
     while True:     
+        item_database = []
+
         if(user == "admin"):
             choices = ["register", "login", "carirarity", "caritahun", "tambahitem", 
             "hapusitem", "ubahjumlah", "riwayatpinjam", "riwayatkembali", "riwayatambil", "save", "help", "exit"]
@@ -97,7 +99,7 @@ def main_program():
                 print("\n>>hapusitem")
                 time.sleep(0.5)
                 
-                all_data[1], all_data[2] = f0507.remove_item(all_data)
+                all_data[1], all_data[2], item_database = f0507.remove_item(all_data)
             elif(command.lower() == "ubahjumlah"):
                 print("\n>>ubahjumlah")
                 all_data[1], all_data[2] = f0507.ubah_jumlah(all_data)
@@ -105,15 +107,15 @@ def main_program():
                 print("\n>>riwayatpinjam")
                 time.sleep(0.5)
                 
-                f1113.look_gadget_borrow(all_data)
+                f1113.look_gadget_borrow(all_data, item_database)
             elif(command.lower() == "riwayatkembali"):
                 print("\n>>riwayatkembali")
-                f1113.look_gadget_return(all_data)
+                f1113.look_gadget_return(all_data, item_database)
             elif(command.lower() == "riwayatambil"):
                 print("\n>>riwayatambil")
                 time.sleep(0.5)
                 
-                f1113.look_history_consumables(all_data)
+                f1113.look_history_consumables(all_data, item_database)
             elif(command.lower() == "save"):
                 print("Saving...")
                 time.sleep(0.5)
