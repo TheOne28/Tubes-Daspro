@@ -122,6 +122,8 @@ def remove_item(all_data):
     
     if(id[0] == "G"):
         file = all_data[1]
+        borrow = all_data[4]
+        dup = file
 
         while True:
             found = False
@@ -139,6 +141,15 @@ def remove_item(all_data):
                         
                         print("Item {} berhasil dihapus".format(data[1]))
                         file.remove(data)
+                        
+                        borrowed = False
+                        for bor in borrow:
+                            if(id == bor[2]):
+                                borrowed = True
+                                break
+
+                        if(not borrowed):
+                           dup.remove(data)
                         break
                     else:
                         break
@@ -155,10 +166,12 @@ def remove_item(all_data):
             else:
                 break
         
-        return file, all_data[2]
+        return file, all_data[2],dup
     
     elif(id[0] == "C"):
         file = all_data[2]
+        dup = file
+        minta = all_data[3]
 
         while True:
             found = False
@@ -175,7 +188,16 @@ def remove_item(all_data):
                         
                         print("Item {} berhasil dihapus".format(data[1]))
                         file.remove(data)
-                             
+                        
+                        minta = False
+                        for mint in minta:
+                            if(id == mint[2]):
+                                minta = True
+                                break
+
+                        if(not minta):
+                           dup.remove(data)
+                        
                         break
                     else:
                         break
@@ -193,7 +215,7 @@ def remove_item(all_data):
                 break
         
     
-        return all_data[1], file
+        return all_data[1], file, dup
 
 def ubah_jumlah(all_data):
     #Asumsi nya bakal di loop terus sampai id valid, jadi cuma ada 2 kemungkinan akhirmya
