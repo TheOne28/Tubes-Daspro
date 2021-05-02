@@ -1,30 +1,32 @@
 import convert
 import validation
+import time
 
-#Need to discuss
-# 1. Kalau misal barang masih dipinjam , perlu di loop input gak?
-# 2. Kalau stok tidak mencukupi, loop atau gak
-# 3. Asumsi isi is_returned Yes atau No
-# 4. Kalau id gak terdaftar gimana
+#Fungsu f08, f09, dan f10
     
 def gadget_borrow(id_peminjam, all_data):
     id = validation.id_validation()
     file1 = all_data[4] #Gadget_borrow
     file2 = all_data[1]#Gadget
 
-    #Bagian ini kebawah diubah
     while True:   
         if(id[0] == "G"):
             while True:
+                
+                time.sleep(0.5)
                 valid = True
                 for data in file1:
-                    if(data[0] == id_peminjam and data[1] == id and data[5] == "No"):
+                    #Pengecekan apakah barang masih dipinjam
+                    if(data[1] == id_peminjam and data[2] == id and data[5] == "No"):
                         valid = False
                         print("Peminjaman barang ini masih dilakukan")
                         break
                 
                 if(not valid):
+                    time.sleep(0.5)
                     pilihan = validation.input_validation("string", "Apakah ingin menginput ulang ID? (Y/N)", ["y", "n"])
+                    
+                    #Pilihan dijamin berupa y atau n
                     if(pilihan.lower() == "y"):
                         id = validation.id_validation()
                     else:
@@ -34,6 +36,7 @@ def gadget_borrow(id_peminjam, all_data):
 
             date = validation.input_validation("string", "Masukkan tanggal peminjaman: ", [])
             date_valid = validation.date_validation(date)
+            
             while(not date_valid):
                 print("Masukan tanggal tidak valid")
                 date = validation.input_validation("string", "Masukkan tanggal peminjaman: ", [])
@@ -52,6 +55,7 @@ def gadget_borrow(id_peminjam, all_data):
                 
                 if(file2[i][3] >= jumlah):
                     new_history = []
+
                     #Asumsi id nya diurut dari 1
                     if(len(file1) == 1):
                         new_history.append(1)
@@ -67,17 +71,26 @@ def gadget_borrow(id_peminjam, all_data):
                     file1.append(new_history)
                     file2[i][3] -= jumlah
 
-                    print("Item {} (x{}) berhasil dipinjam !".format(file2[i][1], jumlah))
+                    time.sleep(0.5)
+                    print("\nItem {} (x{}) berhasil dipinjam !".format(file2[i][1], jumlah))
                     break
                 else:
                     print("Stok tidak mencukupi")
+                    
+                    time.sleep(0.5)
                     pilihan = validation.input_validation("string", "Apakah ingin menginput ulang jumlah? (Y/N)", ["y", "n"])
+                    
+                    #pilihan dijamin berupa y atau n
                     if(pilihan.lower() == "n"):
                         break
                 
             if(not found):
                 print("ID tidak terdaftar")
+                
+                time.sleep(0.5)
                 pilihan = validation.input_validation("string", "Apakah ingin menginput ulang ID? (Y/N)", ["y", "n"])
+                
+                #pilihan dijamin berupa y atau n
                 if(pilihan.lower() == "y"):
                     id = validation.id_validation()
                 else:
@@ -87,7 +100,11 @@ def gadget_borrow(id_peminjam, all_data):
 
         else:
             print("ID tidak valid")
+            
+            time.sleep(0.5)
             pilihan = validation.input_validation("string", "Apakah ingin menginput ulang ID? (Y/N)", ["y", "n"])
+            
+            #pilihan dijamin berupa y atau n
             if(pilihan.lower() == "y"):
                 id = validation.id_validation()
             else:
@@ -96,7 +113,7 @@ def gadget_borrow(id_peminjam, all_data):
     return file1
 
 def return_gadget(id_user, all_data):
-    #Nih keknya agak ngebug wkwkwkwk
+
     file1 = all_data[4] #Gadget_borrow
     file2 = all_data[1] #Gadget
     file3 = all_data[5] #Gadget_retturn
@@ -105,6 +122,9 @@ def return_gadget(id_user, all_data):
     borrowed_id = [] #Nyimpen id peminjaman
     borrowed_count = [] #Nyimpen jumlah barang yang dipinjam
 
+    print("Barang yang dipinjam: ")
+    
+    time.sleep(0.5)
     for i in range(len(file1)):
         if(i != 0) and (id_user == file1[i][1]):
             borrowed_id.append(file1[i][0])
@@ -146,9 +166,13 @@ def return_gadget(id_user, all_data):
     for data in file1:
         if(data[0] == new_return[1]):
             data[5] = "Yes"
-            data[3] += borrowed_count[pinjam - 1]
+    
+    for data in file2:
+        if(data[1] == borrowed_gadget[pinjam - 1]):
+            data[3] += borrowed_count[pinjam-1]
 
-    print("Iten {}(x{}) berhsil dikembalikan".format(borrowed_gadget[pinjam - 1], borrowed_count[pinjam - 1]))
+    time.sleep(0.5)
+    print("\nIten {}(x{}) berhsil dikembalikan".format(borrowed_gadget[pinjam - 1], borrowed_count[pinjam - 1]))
 
     return file1, file3    
 
@@ -157,16 +181,15 @@ def req_consumables(id_user, all_data):
     file1 = all_data[3]#Consumable_history
     file2 = all_data[2]#Consumable
     
-    #Bagian ini kebawah diubah
     while True:
         if(id[0] == "C"):
             jumlah = validation.jumlah_validation()
-            date = validation.input_validation("string", "Masukkan tanggal peminjaman: ", [])
+            date = validation.input_validation("string", "Masukkan tanggal permintaan: ", [])
             date_valid = validation.date_validation(date)
         
             while(not date_valid):
                 print("Masukan tanggal tidak valid")
-                date = validation.input_validation("string", "Masukkan tanggal peminjaman: ", [])
+                date = validation.input_validation("string", "Masukkan tanggal permintaan: ", [])
                 date_valid = validation.date_validation(date)
             
             #Bagian ini berubah
@@ -196,18 +219,27 @@ def req_consumables(id_user, all_data):
                     file1.append(new_history)
                     file2[i][3] -= jumlah
 
-                    print("Item {} (x{}) berhasil dipinjam !".format(data[1], jumlah))
+                    time.sleep(0.5)
+                    print("\nItem {} (x{}) berhasil diminta !".format(file2[i][1], jumlah))
                     break
 
                 else:
                     print("Stok tidak mencukupi")
+                    
+                    time.sleep(0.5)
                     pilihan = validation.input_validation("string", "Apakah ingin menginput ulang jumlah? (Y/N)", ["y", "n"])
+                    
+                    #pilihan dijamin berupa y atau n
                     if(pilihan.lower() == "n"):
                         break
 
             if(not found):
                 print("ID tidak terdaftar")  
+                
+                time.sleep(0.5)
                 pilihan = validation.input_validation("string", "Apakah ingin menginput ulang ID? (Y/N)", ["y", "n"])
+                
+                #pilihan dijamin berupa y atau n
                 if(pilihan.lower() == "y"):
                     id = validation.id_validation()
                 else:
@@ -217,7 +249,11 @@ def req_consumables(id_user, all_data):
 
         else:
             print("ID tidak valid")
+            
+            time.sleep(0.5)
             pilihan = validation.input_validation("string", "Apakah ingin menginput ulang ID? (Y/N)", ["y", "n"])
+            
+            #pilihan dijamin berupa y atau n
             if(pilihan.lower() == "y"):
                 id = validation.id_validation()
             else:

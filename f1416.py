@@ -2,9 +2,8 @@ import os
 import convert
 import validation
 
-#Need to discuss
-#1. Dicek lagi urutan filenya, biar gak bingung atau dijelasin di help
-#2. Cek lagi asumsi nama filenya
+#fungsi f14, f15, dan f16
+
 path = os.path.dirname(__file__)
 file_name = ["user.csv", "gadget.csv", "consumables.csv", "consumable_history.csv", "gadget_borrow_history.csv", "gadget_return_history.csv"]
 
@@ -16,7 +15,7 @@ def load(folder):
 
     #Asumsi nama file tetap
     for i in range(6):
-        all_data.append(convert.open_file("{}\\{}\\{}".format(path, folder, file_name[i]))) #All_data[0]
+        all_data.append(convert.open_file("{}\\{}\\{}".format(path, folder, file_name[i]))) 
 
     return all_data
 
@@ -40,13 +39,13 @@ def save(all_data):
             convert.save_file("{}\\{}\\{}".format(path, folder_name, file_name[i]), all_data[i])
         else:
             convert.create_new("{}\\{}\\{}".format(path, folder_name, file_name[i]), all_data[i])
+    print("Data berhasil disimpan di folder {}".format((folder_name)))
 
-#Pake punya gilang
 def help(user):
-    #Aku kepikiran kalau misalnya help itu nampilin command yang tersedi, jadi kalau misalnya sebelum
-    #yang ditampilin cuma login dan help doanh, gimana ?
+   
     if(user == "user"):
         #Load gak dimasukin soalnya bukan command yang tersedia
+        #Help untuk user
         print("======================= Help =================================")
         print("login - untuk melakukan login ke dalam sistem")
         print("pinjam - untuk melakukan peminjaman pada gadget yang diinginkan")
@@ -58,6 +57,7 @@ def help(user):
 
     elif(user == "admin"):
         #Load gak dimasukin soalnya bukan command yang tersedia
+        #Help untuk admin
         print("======================= Help =================================")
         print("Register - untuk melakukan register user baru")
         print("login - untuk melakukan login ke dalam sistem")
@@ -74,12 +74,13 @@ def help(user):
         print("help - untuk mengeluarkan bantuan dan perintah yang tersedia")
 
     else:
+        #Help sebelum login
         print("======================= Help =================================")
         print("login - untuk melakukan login ke dalam sistem")
         print("help - untuk mengeluarkan bantuan dan perintah yang tersedia")
 
 def exit(all_data):
     cek = validation.input_validation("string", "Apakah anda mau melakukan penyimpanan file yang diubah? (Y/N)", ["y", "n"])
-
+    #cek dijamin berupa y atau n
     if(cek.upper() == "Y"):
         save(all_data)

@@ -1,25 +1,23 @@
 import time
 import validation
 
-#Need to discuss
-#1. Pesan pas log in nya (desain ui)
-#2. Cek yang asumsi-asumsi
-#3. Penempatan sleepnya
-#4. Coba cek lagi sapa tau ada case yang aku kelewat
+#Fungsi f01 dan f02
 
 def user_login(user_file):
     
     #Fungsi login
     print(">>login ")
-
+    
+    time.sleep(0.5)
     username = validation.input_validation("string", "Masukkan Username: ", [])
     password = validation.input_validation("string", "Masukkan Password: ", [])
     
     time.sleep(0.5)
-    print("Loading")
+    print("\nLoading...\n")
     
     time.sleep(0.5)
     
+    #Pengecekan username dan password
     for data in user_file:
         if(data[1] == username) and (data[4] == password ):
             if(data[5] == "admin"):
@@ -41,16 +39,20 @@ def user_login(user_file):
     
     
 def user_register(user_file):
+    #Fungsi register
 
-    print(">>Register")
+    time.sleep(0.5)
     name = validation.input_validation("string", "Masukkan nama: ", [])
     username = validation.input_validation("string", "Masukkan username: ", [])
     
     while(True):
-        print("Validating username\nPlease wait")
+        print("\nValidating username")
+        time.sleep(0.3)
+        print("Please wait\n")
         time.sleep(0.5)
         check = False
-        #Ngecek username dah ada belum        
+
+        #Proses pengecekan username       
         for data in user_file:
             if(data[1] == username):
                 print("User already registered.")
@@ -70,6 +72,7 @@ def user_register(user_file):
     time.sleep(0.5)    
     
     new_user = []
+    
     #Asumsi user_id nya urut dari 1 , gak da tambahan depannya
     user_id = int(user_file[len(user_file) - 1][0]) + 1
     
