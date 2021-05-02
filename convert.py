@@ -19,19 +19,21 @@ def array_to_reality(third_data, name):
     #Untuk file consumable, jumlah(3) integer
     #Untuk file gadget_borrow jumlah(4) integer
     #Untuk file consumbale history, jumlah(4)
-    if(name == "user.csv"):
+
+    #Bagian ini yang diubah
+    if(name.find("user.csv") != -1):
         return third_data
     else:
         for j in range(len(third_data)):
             if(j != 0):
-                if(name == "gadget.csv"):
+                if(name.find("gadget.csv") != -1):
                     third_data[j][3] = int(third_data[j][3])
                     third_data[j][5] = int(third_data[j][5])
-                elif(name == "consumables.csv"):
+                elif(name.find("consumables.csv") != -1):
                     third_data[j][3] = int(third_data[j][3])
-                elif(name == "gadget_borrom_history.csv"):
+                elif(name.find("gadget_borrom_history.csv") != -1):
                     third_data[j][4] = int(third_data[j][4])
-                elif(name == "consumables_history.csv"):
+                elif(name.find("consumables_history.csv") != -1):
                     third_data[j][4] = int(third_data[j][4])
         return third_data
 
